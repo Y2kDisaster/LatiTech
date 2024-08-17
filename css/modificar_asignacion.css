@@ -1,0 +1,73 @@
+body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 30px;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        
+        input[type="submit"] {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        /* Estilos para el combo box */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  font-size: 16px;
+  width: 100%;
+}
+
+/* Estilo para el texto seleccionado en el combo box */
+select option[selected] {
+  font-weight: bold;
+}
+
+/* Estilos para la flecha del combo box */
+select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  color: #999;
+}
+
+/* Estilo para el contenedor del combo box */
+div.select-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+/* Estilo para el contenedor del combo box con borde rojo cuando es requerido */
+div.select-wrapper.required select {
+  border-color: #ff0000;
+}

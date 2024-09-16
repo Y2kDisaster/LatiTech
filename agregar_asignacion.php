@@ -1,40 +1,33 @@
 <?php
-$servername = "localhost";  // Nombre del servidor
-$username = "root";         // Usuario de MySQL (por defecto en XAMPP)
-$password = "";             // Contraseña de MySQL (por defecto en XAMPP)
-$dbname = "latitudemx";     // Nombre de la base de datos
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "latitudemx";
 
-// Crear una conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Verificar si la conexión es exitosa
 if ($conn->connect_error) {
     die("Error al conectar con la base de datos: " . $conn->connect_error);
 }
 session_start();
 
-// Verificar si la sesión está iniciada y el usuario está autenticado
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    // Redirigir al usuario a la página de inicio de sesión o mostrar un mensaje de error
     header("Location: loging.php");
     exit();
 }
-// Verificar si se ha enviado el formulario de ingreso
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Obtener los datos ingresados en el formulario
-    $ID_EMPLEADO = $_POST["ID_EMPLEADO"];
-    $NOMBRE = $_POST["ID_EQUIPO"];
 
-    // Consulta SQL para verificar si el campo ID_EMPLEADO está duplicado
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $ID_EMPLEADO = $_POST["ID_EMPLEADO"];
+    $ID_EQUIPO = $_POST["ID_EQUIPO"];
+
     $check_duplicate_sql = "SELECT ID_EMPLEADO FROM empleados WHERE ID_EMPLEADO = '$ID_EMPLEADO'";
     $duplicate_result = $conn->query($check_duplicate_sql);
 
     if ($duplicate_result->num_rows > 0) {
-        echo '<script>alert("El nombre de equipo \'' . $ID_EMPLEADO . '\' ya está duplicado. Por favor, ingresa otro nombre.");</script>';
+        echo '<script>alert("El ID de empleado \'' . $ID_EMPLEADO . '\' ya existe. Por favor, ingresa otro.");</script>';
     } else {
-        // Consulta SQL para insertar un nuevo registro en la tabla "empleados"
-        $insert_sql = "INSERT INTO empleados (ID_EMPLEADO, NOMBRE, APELLIDOS, CORREO)
-                VALUES ('$ID_EMPLEADO', '$NOMBRE', '$APELLIDOS', '$CORREO')";
+        $insert_sql = "INSERT INTO empleados (ID_EMPLEADO, NOMBRE)
+                VALUES ('$ID_EMPLEADO', '$ID_EQUIPO')";
 
         if ($conn->query($insert_sql) === true) {
             echo '<script>alert("Registro insertado correctamente.");</script>';
@@ -43,24 +36,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-// Cerrar la conexión
-$conn->close();
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <link rel="icon" type="image/x-icon" href="img/latitude.ico">
-    <link rel="stylesheet" type="text/css" href="css/agregar_empleado.css">
-    <title>Ingresar Registro de Equipo</title>
+    <link rel="stylesheet" type="text/css" href="css/agregar_asignacion.css">
+    <title>Ingresar Registro de Asignación</title>
 </head>
 <body>
     <div class="header">
         <div>
-            <img class="logo" src="img/latitude2.png" alt="Logo de la empresa">
+            <a href="https://www.latitude.mx"><img class="logo" src="img/latitude2.png" alt="Logo de la empresa"></a>
         </div>
         <div class="menu-container">
-            <!-- Aquí puedes agregar los elementos de tu menú -->
             <a class="button-menu" href="inicio.php">Inicio</a>
             <a class="button-menu" href="#">Asignaciones</a>
             <a class="button-menu" href="empleados.php">Empleados</a>
@@ -73,13 +63,68 @@ $conn->close();
     <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
         <div>
             <label for="ID_EMPLEADO">ID Empleado:</label>
-            <input type="text" name="ID_EMPLEADO" required>
+            <select name="ID_EMPLEADO" required>
+                <option value="">Seleccionar Empleado</option>
+                <?php
+                // Consulta para obtener los empleados
+                $sql_id = "SELECT ID_EMPLEADO FROM empleados";
+                $result_empleados = $conn->query($sql_id);
+
+                if ($result_empleados->num_rows > 0) {
+                    while ($row = $result_empleados->fetch_assoc()) {
+                        echo '<option value="' . $row["ID_EMPLEADO"] . '">' . $row["ID_EMPLEADO"] . '</option>';
+                    }
+                } else {
+                    echo '<option value="">No hay empleados disponibles</option>';
+                }
+                ?>
+            </select>
+        </div>
+
+        <div>
+            <label for="NOMBRE">Nombre:</label>
+            <input type="text" name="NOMBRE" value="<?php
+                // Consulta para obtener el nombre del empleado seleccionado
+                if (!empty($_POST['ID_EMPLEADO'])) {
+                    $ID_EMPLEADO = $_POST['ID_EMPLEADO'];
+                    $sql_nombre = "SELECT NOMBRES FROM empleados WHERE ID_EMPLEADO = '$ID_EMPLEADO'";
+                    $result_nombre = $conn->query($sql_nombre);
+
+                    if ($result_nombre->num_rows > 0) {
+                        $row_nombre = $result_nombre->fetch_assoc();
+                        echo htmlspecialchars($row_nombre['NOMBRES']);
+                    } else {
+                        echo "";
+                    }
+                }
+            ?>">
         </div>
 
         <div>
             <label for="ID_EQUIPO">Nombre del Equipo:</label>
-            <input type="text" name="NOMBRE" required>
+            <select name="ID_EQUIPO" required>
+                <option value="">Seleccionar Equipo</option>
+                <?php
+                // Consulta para obtener los equipos con estado 'STOCK'
+                $sql_equipos = "SELECT NOMBRE_EQUIPO FROM equipos WHERE ESTADO = 'STOCK'";
+                $result_equipos = $conn->query($sql_equipos);
+
+                if ($result_equipos->num_rows > 0) {
+                    while ($row = $result_equipos->fetch_assoc()) {
+                        echo '<option value="' . $row["NOMBRE_EQUIPO"] . '">' . $row["NOMBRE_EQUIPO"] . '</option>';
+                    }
+                } else {
+                    echo '<option value="">No hay equipos disponibles en STOCK</option>';
+                }
+                ?>
+            </select>
+        </div>
+
+        <div>
+            <input type="submit" value="Agregar">
         </div>
     </form>
+
+    <?php $conn->close(); // Cerrando la conexión al final ?>
 </body>
 </html>

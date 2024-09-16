@@ -165,7 +165,7 @@ $conn->close();
 <body>
     <div class="header">
         <div>
-            <img class="logo" src="img/latitude2.png" alt="Logo de la empresa">
+        <a href="https://www.latitude.mx"> <img class="logo" src="img/latitude2.png" alt="Logo de la empresa"></a>
         </div>
         <div class="menu-container">
             <!-- Aquí puedes agregar los elementos de tu menú -->

@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
   <div class="container">
-    <img src="img/latitude2.png">
+  <a href="https://www.latitude.mx"><img src="img/latitude2.png"></a>
     <h2>Iniciar Sesión</h2>
     <?php if (isset($error_message)) { ?>
       <p style="color: red;"><?php echo $error_message; ?></p>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Inicio</title>
     <link rel="icon" type="image/x-icon" href="img/latitude.ico">
     <link rel="stylesheet" type="text/css" href="css/inicio.css">
     <?php
@@ -25,7 +26,7 @@
 <body>
 <div class="header"> 
    <div>
-        <img class="logo" src="img/latitude2.png" alt="Logo de la empresa">
+   <a href="https://www.latitude.mx"><img class="logo" src="img/latitude2.png" alt="Logo de la empresa"></a>
     </div>
     <div class="menu-container">
         <!-- Aquí puedes agregar los elementos de tu menú -->

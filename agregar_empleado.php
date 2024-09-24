@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo '<script>alert("El nombre de equipo \'' . $ID_EMPLEADO . '\' ya está duplicado. Por favor, ingresa otro nombre.");</script>';
     } else {
         // Consulta SQL para insertar un nuevo registro en la tabla "empleados"
-        $insert_sql = "INSERT INTO empleados (ID_EMPLEADO, NOMBRE, APELLIDOS, CORREO)
+        $insert_sql = "INSERT INTO empleados (ID_EMPLEADO, NOMBRES, APELLIDOS, CORREO)
                 VALUES ('$ID_EMPLEADO', '$NOMBRE', '$APELLIDOS', '$CORREO')";
 
         if ($conn->query($insert_sql) === true) {

@@ -10,7 +10,7 @@
 <body>
     <div class="header">
         <div>
-        <a href=""><img class="logo" src="img/latitude2.png" alt="Logo de la empresa"></a>
+        <a href="https://www.latitude.mx"><img class="logo" src="img/latitude2.png" alt="Logo de la empresa"></a>
         </div>
         <div class="menu-container">
             <!-- Aquí puedes agregar los elementos de tu menú -->

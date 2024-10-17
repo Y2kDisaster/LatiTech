@@ -109,7 +109,8 @@ if ($result === false) {
 if ($result->num_rows > 0) {
     // Imprimir los registros en una tabla
     echo "<table class='table'>";
-    echo "<tr><th>Nombre del Equipo</th><th>ID Empleado</th><th>Nombres</th><th>Apellidos</th><td class='modify' colspan='2'><center><a class='button' href='agregar_asignacion.php'>Agregar un nuevo registro</a></center></td></tr>";
+    echo "<tr><th>Nombre del Equipo</th><th>ID Empleado</th><th>Nombres</th><th>Apellidos</th><td class='modify' colspan='2'><center>
+    <a class='button' href='agregar_asignacion.php'>Agregar un nuevo registro</a></center></td></tr>";
 
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
@@ -129,11 +130,8 @@ if ($result->num_rows > 0) {
 
 // Agregar botón para agregar un nuevo registro
 echo "<div class='add-button'><a class='button' href='agregar_asignacion.php'>Agregar un nuevo registro</a></div>";
-
 // Cerrar la conexión
 $conn->close();
 ?>
-
 </body>
-
 </html>

@@ -81,7 +81,8 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // Imprimir los registros en una tabla
     echo "<table class='table'>";
-    echo "<tr><th>ID</th><th>Nombre(s)</th><th>Apellido</th><th>Correo</th><td class = 'modify' colspan='2'><center><a class='button' href='agregar_empleado.php'>Agregar un nuevo registro</a></center></td></tr>";
+    echo "<tr><th>ID</th><th>Nombre(s)</th><th>Apellido</th><th>Correo</th><td class = 'modify' colspan='2'><center>
+    <a class='button' href='agregar_empleado.php'>Agregar un nuevo registro</a></center></td></tr>";
 
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
@@ -92,7 +93,6 @@ if ($result->num_rows > 0) {
         echo "<td><a class='button edit' href='modificar_empleado.php?id=" . $row["ID_EMPLEADO"] . "'><img src='img/editar.png'/></a></td>"     ;
         echo "<td><a class='button delete' onclick='eliminarRegistro(\"" . $row["ID_EMPLEADO"] . "\")'><img src='img/eliminar.png'/></a></td>";
     }
-
     echo "</table>";
 } else {
     echo "No se encontraron registros.";

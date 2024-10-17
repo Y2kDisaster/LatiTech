@@ -86,16 +86,19 @@
         $filtro = $_GET["filtro"];
         
         // Agregar el filtro a la consulta SQL
-        $sql .= " WHERE NOMBRE_EQUIPO LIKE '%$filtro%' OR NUMERO_SERIE LIKE '%$filtro%' OR ESTADO LIKE '%$filtro%' OR MARCA_EQUIPO LIKE '%$filtro%' OR MODELO_EQUIPO LIKE '%$filtro%' OR SISTEMA_OPERATIVO LIKE '%$filtro%' OR MARCA_PROCESADOR LIKE '%$filtro%' OR MODELO_PROCESADOR LIKE '%$filtro%' OR VELOCIDAD_PROCESADOR LIKE '%$filtro%' OR RAM LIKE '%$filtro%' OR NUMERO_DISCOS LIKE '%$filtro%' OR TIPO_DISCO0 LIKE '%$filtro%' OR TIPO_DISCO1 LIKE '%$filtro%'";
+        $sql .= " WHERE NOMBRE_EQUIPO LIKE '%$filtro%' OR NUMERO_SERIE LIKE '%$filtro%' OR ESTADO LIKE '%$filtro%' OR MARCA_EQUIPO LIKE '%$filtro%' OR MODELO_EQUIPO 
+        LIKE '%$filtro%' OR SISTEMA_OPERATIVO LIKE '%$filtro%' OR MARCA_PROCESADOR LIKE '%$filtro%' OR MODELO_PROCESADOR LIKE '%$filtro%' OR VELOCIDAD_PROCESADOR LIKE 
+        '%$filtro%' OR RAM LIKE '%$filtro%' OR NUMERO_DISCOS LIKE '%$filtro%' OR TIPO_DISCO0 LIKE '%$filtro%' OR TIPO_DISCO1 LIKE '%$filtro%'";
     }
-
     // Consulta a la tabla "equipos"
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         // Imprimir los registros en una tabla
         echo "<table class='table'>";
-        echo "<tr><th>Nombre</th><th>Número de Serie</th><th>Estado</th><th>Marca</th><th>Modelo</th><th>Sistema Operativo</th><th>Marca Procesador</th><th>Modelo Procesador</th><th>Velocidad Procesador</th><th>RAM</th><th>Número de Discos</th><th class='disco'>Disco 0</th><th class='disco'>Disco 1</th><td colspan='2'><center><a class='button' href='agregar_equipo.php'>Agregar un nuevo registro</a></center></td></tr>";
+        echo "<tr><th>Nombre</th><th>Número de Serie</th><th>Estado</th><th>Marca</th><th>Modelo</th><th>Sistema Operativo</th><th>Marca Procesador</th><th>Modelo Procesador</th>
+        <th>Velocidad Procesador</th><th>RAM</th><th>Número de Discos</th><th class='disco'>Disco 0</th><th class='disco'>Disco 1</th><td colspan='2'><center>
+        <a class='button' href='agregar_equipo.php'>Agregar un nuevo registro</a></center></td></tr>";
 
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
@@ -114,17 +117,13 @@
             echo "<td class='registro'>" . $row["TIPO_DISCO1"] . "</td>";
             echo "<td><a class='button edit' href='modificar_equipo.php?id=" . $row["NOMBRE_EQUIPO"] . "'><img src='img/editar.png'/></a></td>"     ;
             echo "<td><a class='button delete' onclick='eliminarRegistro(\"" . $row["NOMBRE_EQUIPO"] . "\")'><img src='img/eliminar.png'/></a></td>";
-
         }
-
         echo "</table>";
     } else {
         echo "No se encontraron registros.";
     }
-
     // Agregar botón para agregar un nuevo registro
     echo "<div class='add-button'><a class='button' href='agregar_equipo.php'>Agregar un nuevo registro</a></div>";
-
     // Cerrar la conexión
     $conn->close();
     ?>

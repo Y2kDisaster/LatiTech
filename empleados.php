@@ -22,7 +22,14 @@
         </div>
     </div>
     <h1>Consulta de Empleados</h1>
-    <!-- Resto del código HTML omitido por brevedad -->
+    <div class="search-container">
+    <form method="GET" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <div style="margin-bottom: 20px;">
+        <label for="filtro" style="font-weight: bold;">Buscar: </label>
+        <input type="text" id="filtro" name="filtro" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+        <button type="submit" style="padding: 8px 15px; background-color: #007bff; color: #fff; border: none; border-radius: 5px;">Buscar</button>
+    </div>
+</form>
 </body>
 </html>
 
@@ -73,9 +80,18 @@ function eliminarRegistro($id_empleado) {
         echo "Error al eliminar el registro: " . $conn->error;
     }
 }
+$filtro = "";
 
-// Consulta a la tabla "empleados"
-$sql = "SELECT * FROM empleados";
+// Verificar si se envió una palabra clave para buscar
+if (isset($_GET['filtro'])) {
+    $filtro = $_GET['filtro'];
+}
+
+$sql = "SELECT * FROM empleados WHERE 
+        ID_EMPLEADO LIKE '%$filtro%' OR 
+        NOMBRES LIKE '%$filtro%' OR 
+        APELLIDOS LIKE '%$filtro%'";
+
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

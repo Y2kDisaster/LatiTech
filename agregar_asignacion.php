@@ -16,25 +16,39 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     exit();
 }
 
+// Verifica si se ha enviado el formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Obtén los valores de ID_EMPLEADO e ID_EQUIPO del formulario
     $ID_EMPLEADO = $_POST["ID_EMPLEADO"];
     $ID_EQUIPO = $_POST["ID_EQUIPO"];
 
-    $check_duplicate_sql = "SELECT ID_EMPLEADO FROM empleados WHERE ID_EMPLEADO = '$ID_EMPLEADO'";
-    $duplicate_result = $conn->query($check_duplicate_sql);
+    // Consulta para verificar si el empleado ya tiene una asignación de equipo
+    $check_duplicate_sql = "SELECT ID_EMPLEADO FROM asignaciones WHERE ID_EMPLEADO = ?";
+    $stmt = $conn->prepare($check_duplicate_sql);  // Usamos prepared statements para seguridad
+    $stmt->bind_param("s", $ID_EMPLEADO);  // 's' indica que se está enlazando un string
+    $stmt->execute();
+    $duplicate_result = $stmt->get_result();
 
+    // Verifica si el empleado ya tiene una asignación
     if ($duplicate_result->num_rows > 0) {
-        echo '<script>alert("El ID de empleado \'' . $ID_EMPLEADO . '\' ya existe. Por favor, ingresa otro.");</script>';
+        echo '<script>alert("El ID de empleado \'' . $ID_EMPLEADO . '\' ya tiene una asignación. Por favor, ingresa otro.");</script>';
     } else {
-        $insert_sql = "INSERT INTO empleados (ID_EMPLEADO, NOMBRE)
-                VALUES ('$ID_EMPLEADO', '$ID_EQUIPO')";
+        // Inserta el nuevo registro en la tabla asignaciones
+        $insert_sql = "INSERT INTO asignaciones (ID_EMPLEADO, ID_EQUIPO) VALUES (?, ?)";
+        $stmt_insert = $conn->prepare($insert_sql);
+        $stmt_insert->bind_param("ss", $ID_EMPLEADO, $ID_EQUIPO);  // 'ss' indica dos strings
 
-        if ($conn->query($insert_sql) === true) {
+        if ($stmt_insert->execute()) {
             echo '<script>alert("Registro insertado correctamente.");</script>';
         } else {
             echo '<script>alert("Error al insertar el registro: ' . $conn->error . '");</script>';
         }
+
+        $stmt_insert->close();
     }
+
+    // Cierra la declaración y la conexión
+    $stmt->close();
 }
 ?>
 
@@ -42,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <link rel="icon" type="image/x-icon" href="img/latitude.ico">
-    <link rel="stylesheet" type="text/css" href="css/agregar_empleado.css">
+    <link rel="stylesheet" type="text/css" href="css/agregar_asignacion.css">
     <title>Ingresar Registro de Equipo</title>
 </head>
 <body>
@@ -52,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="menu-container">
             <a class="button-menu" href="inicio.php">Inicio</a>
-            <a class="button-menu" href="#">Asignaciones</a>
+            <a class="button-menu" href="asignaciones.php">Asignaciones</a>
             <a class="button-menu" href="empleados.php">Empleados</a>
             <a class="button-menu" href="equipos.php">Equipos</a>
             <a class="button-menu logout" href="loging.php">Cerrar sesión</a>
@@ -67,27 +81,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <div>
-            <label for="ID_EQUIPO">Nombre del Equipo:</label>
-            <select name="ID_EQUIPO" required>
-                <option value="">Seleccione un equipo</option>
-                <?php
-                // Consulta para obtener los equipos con estado 'STOCK'
-                $sql = "SELECT ID_EQUIPO FROM equipos WHERE ESTADO = 'STOCK'";
-                $result = $conn->query($sql);
+    <label for="ID_EQUIPO">Nombre del Equipo:</label>
+    <select name="ID_EQUIPO" required>
+        <option value="">Seleccione un equipo</option>
+        <?php
+        // Consulta para obtener los equipos con estado 'STOCK'
+        $sql = "SELECT NOMBRE_EQUIPO FROM equipos WHERE ESTADO = 'STOCK'";
+        $result = $conn->query($sql);
 
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo '<option value="' . $row["ID_EQUIPO"] . '">' . $row["NOMBRE_EQUIPO"] . '</option>';
-                    }
-                } else {
-                    echo '<option value="">No hay equipos disponibles en STOCK</option>';
-                }
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                // Mostrar el nombre del equipo como el valor y el texto de la opción
+                echo '<option value="' . $row["NOMBRE_EQUIPO"] . '">' . $row["NOMBRE_EQUIPO"] . '</option>';
+            }
+        } else {
+            echo '<option value="">No hay equipos disponibles en STOCK</option>';
+        }
 
-                $conn->close();
-                ?>
-            </select>
-        </div>
-
+        $conn->close();
+        ?>
+    </select>
+</div>
         <div>
             <input type="submit" value="Agregar">
         </div>

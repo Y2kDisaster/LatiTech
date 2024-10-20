@@ -63,6 +63,7 @@ $conn->close();
 <html>
 <head>
     <link rel="icon" type="image/x-icon" href="img/latitude.ico">
+    <link rel="stylesheet" type="text/css" href="css/agregar_equipo.css">
     <title>Ingresar Registro de Equipo</title>
 </head>
 <body>

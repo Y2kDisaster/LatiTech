@@ -64,7 +64,7 @@ $conn->close();
         <div class="menu-container">
             <!-- Aquí puedes agregar los elementos de tu menú -->
             <a class="button-menu" href="inicio.php">Inicio</a>
-            <a class="button-menu" href="#">Asignaciones</a>
+            <a class="button-menu" href="asignaciones.php">Asignaciones</a>
             <a class="button-menu" href="empleados.php">Empleados</a>
             <a class="button-menu" href="equipos.php">Equipos</a>
             <a class="button-menu logout" href="loging.php">Cerrar sesión</a>

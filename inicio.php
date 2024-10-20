@@ -52,7 +52,12 @@
             <i class="fa fa-asignacion"></i>
             <span>Asignaciones</span>
             <img src="img/asig.png" />
-        </a>        
+        </a>
+        <a href="organizacion.php" class="button">
+            <i class="fa fa-asignacion"></i>
+            <span>Organigrama</span>
+            <img src="img/organigrama.png" />
+        </a>         
     </div>
 </div>
 <form id="logout-form" action="loging.php" method="POST" style="display: none;">

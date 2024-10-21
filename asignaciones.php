@@ -2,7 +2,7 @@
 <html>
 <head>
     <link rel="icon" type="image/x-icon" href="img/latitude.ico">
-    <link rel="stylesheet" type="text/css" href="css/asignaciones.css">
+    <link rel="stylesheet" type="text/css" href="css/asignaciones2.css">
     <title>Consulta de Asignaciones</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/asignaciones.js"></script>
@@ -36,18 +36,7 @@
 </html>
 
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "latitudemx";
-
-// Crear la conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar la conexión
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
-}
+include('conexion.php');
 session_start();
 
 // Verificar si la sesión está iniciada y el usuario está autenticado
@@ -119,8 +108,8 @@ if ($result->num_rows > 0) {
         echo "<td class='registro'>" . $row["ID_ASIGNACION"] . "</td>";
         echo "<td class='registro'>" . $row["NOMBRES"] . " " . $row["APELLIDOS"] . "</td>";
         echo "<td class='registro'>" . $row["ID_EQUIPO"] . "</td>";
+        echo "<td><a class='button report' href='carta_responsabilidad.php?id=" . $row["ID_ASIGNACION"] . "'><img src='img/report.png'/></a></td>";
         echo "<td><a class='button edit' href='modificar_asignacion.php?id=" . $row["ID_ASIGNACION"] . "'><img src='img/editar.png'/></a></td>";
-        
         // Formulario para eliminar el registro
         echo "<td><form method='POST' action='' onsubmit='return confirm(\"¿Estás seguro de que deseas eliminar este registro?\");'>
         <input type='hidden' name='id_asignacion' value='" . $row["ID_ASIGNACION"] . "' />

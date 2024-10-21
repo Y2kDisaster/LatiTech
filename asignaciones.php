@@ -108,7 +108,7 @@ if ($result->num_rows > 0) {
         echo "<td class='registro'>" . $row["ID_ASIGNACION"] . "</td>";
         echo "<td class='registro'>" . $row["NOMBRES"] . " " . $row["APELLIDOS"] . "</td>";
         echo "<td class='registro'>" . $row["ID_EQUIPO"] . "</td>";
-        echo "<td><a class='button report' href='carta_responsabilidad.php?id=" . $row["ID_ASIGNACION"] . "'><img src='img/report.png'/></a></td>";
+        echo "<td><a class='button report' href='carta_responsiva.php?id=" . $row["ID_ASIGNACION"] . "'><img src='img/report.png'/></a></td>";
         echo "<td><a class='button edit' href='modificar_asignacion.php?id=" . $row["ID_ASIGNACION"] . "'><img src='img/editar.png'/></a></td>";
         // Formulario para eliminar el registro
         echo "<td><form method='POST' action='' onsubmit='return confirm(\"¿Estás seguro de que deseas eliminar este registro?\");'>

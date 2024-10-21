@@ -34,18 +34,7 @@
 </html>
 
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "latitudemx";
-
-// Create the connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check the connection
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
-}
+include('conexion.php');
 session_start();
 
 // Verificar si la sesión está iniciada y el usuario está autenticado

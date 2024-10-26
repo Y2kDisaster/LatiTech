@@ -67,7 +67,7 @@ if ($result_equipo) {
     <div class="container">
         <h1>Cláusula de Responsabilidad y Compensación</h1>
         <p>El Colaborador asignado en este caso <strong><?php echo $colaborador; ?></strong> acepta y reconoce que asume la completa 
-        responsabilidad de salvaguardar y proteger el siguiente equipo de cómputo recibido de Latitude Constructora SA de CV</p>
+        responsabilidad de salvaguardar y proteger el siguiente equipo de cómputo recibido de Latitude Constructora S.A. de C.V.</p>
         
         <h2>Equipo <?php echo $nombre_equipo; ?></h2>
         <ul>

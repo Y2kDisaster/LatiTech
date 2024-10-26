@@ -66,7 +66,8 @@ if ($result_equipo) {
 <body>
     <div class="container">
         <h1>Cláusula de Responsabilidad y Compensación</h1>
-        <p>El Colaborador asignado en este caso <strong><?php echo $colaborador; ?></strong> acepta y reconoce que asume la completa responsabilidad de salvaguardar y proteger el siguiente equipo de cómputo recibido de Latitude Constructora SA de CV</p>
+        <p>El Colaborador asignado en este caso <strong><?php echo $colaborador; ?></strong> acepta y reconoce que asume la completa 
+        responsabilidad de salvaguardar y proteger el siguiente equipo de cómputo recibido de Latitude Constructora SA de CV</p>
         
         <h2>Equipo <?php echo $nombre_equipo; ?></h2>
         <ul>
@@ -75,11 +76,16 @@ if ($result_equipo) {
             <li><strong>Número de serie:</strong> <?php echo $numero_serie; ?></li>
         </ul>
 
-        <p>En caso de pérdida, robo, extravío, daño o avería del equipo de cómputo por causa imputable al Colaborador asignado, este se compromete a pagar el valor total del equipo de cómputo calculado al momento del siniestro.</p>
-        <p>El valor del equipo de cómputo se determinará tomando en consideración su estado y características al momento de la ocurrencia del siniestro, así como su valor de mercado o su costo de reposición.</p>
-        <p>El Colaborador asignado se compromete a utilizar el equipo de cómputo exclusivamente para los fines relacionados con su trabajo. Además, deberá mantener el equipo en condiciones adecuadas de funcionamiento y conservación siguiendo las instrucciones de uso y cuidado proporcionadas por el fabricante.</p>
-        <p>En caso de que el equipo de cómputo sufra daños o averías que no sean imputables al Colaborador asignado, este deberá notificar de inmediato a Latitude Constructora S.A. de C.V. por medio del Lic. Ricardo Acosta y/o el Depto. de Sistemas para colaborar en las gestiones necesarias para su reparación o reemplazo.</p>
-        <p>El Colaborador asignado comprende y acepta que cualquier incumplimiento de las disposiciones establecidas en esta cláusula podría resultar en su obligación de indemnizar a Latitude Constructora SA de CV por el valor del equipo de cómputo y los perjuicios ocasionados.</p>
+        <p>En caso de pérdida, robo, extravío, daño o avería del equipo de cómputo por causa imputable al Colaborador asignado, este se compromete 
+        a pagar el valor total del equipo de cómputo calculado al momento del siniestro.</p>
+        <p>El valor del equipo de cómputo se determinará tomando en consideración su estado y características al momento de la ocurrencia del siniestro, 
+        así como su valor de mercado o su costo de reposición.</p>
+        <p>El Colaborador asignado se compromete a utilizar el equipo de cómputo exclusivamente para los fines relacionados con su trabajo. 
+        Además, deberá mantener el equipo en condiciones adecuadas de funcionamiento y conservación siguiendo las instrucciones de uso y cuidado proporcionadas por el fabricante.</p>
+        <p>En caso de que el equipo de cómputo sufra daños o averías que no sean imputables al Colaborador asignado, este deberá notificar de inmediato a 
+        Latitude Constructora S.A. de C.V. por medio del Lic. Ricardo Acosta y/o el Depto. de Sistemas para colaborar en las gestiones necesarias para su reparación o reemplazo.</p>
+        <p>El Colaborador asignado comprende y acepta que cualquier incumplimiento de las disposiciones establecidas en esta cláusula podría 
+        resultar en su obligación de indemnizar a Latitude Constructora SA de CV por el valor del equipo de cómputo y los perjuicios ocasionados.</p>
         
         <div class="firma">
             <p>_____________________________________</p>

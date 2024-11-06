@@ -1,13 +1,7 @@
 <?php
+include('conexion.php');
+
 session_start();
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "latitudemx";
-
-// Crear la conexión
-$conn = mysqli_connect($servername, $username, $password, $database);
 
 // Verificar la conexión
 if (!$conn) {
@@ -23,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Utiliza las funciones de PHP y SQL para realizar las consultas necesarias
 
     // Ejemplo de consulta para verificar si el usuario y la contraseña coinciden
-    $sql = "SELECT * FROM accesos WHERE CORREO = '$usuario' AND PASSWORD = '$contraseña'";
+    $sql = "SELECT * FROM accesos WHERE USUARIO = '$usuario' AND PASSWORD = '$contraseña'";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {

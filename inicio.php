@@ -37,7 +37,12 @@
 <div class="container">
     <h1>Bienvenido</h1>
     <h3>Selecciona a qué datos quieres acceder</h3>
-    <div class="button-container">
+    <div class="button-container">      
+        <a href="usuarios.php" class="button">
+            <i class="fa fa-desktop"></i>
+            <span>Usuarios</span>
+            <img src="img/users.png" />
+        </a>
         <a href="equipos.php" class="button">
             <i class="fa fa-desktop"></i>
             <span>Equipos</span>
@@ -52,6 +57,11 @@
             <i class="fa fa-asignacion"></i>
             <span>Asignaciones</span>
             <img src="img/asig.png" />
+        </a>
+        <a href="reportes.php" class="button">
+            <i class="fa fa-asignacion"></i>
+            <span>Reportes</span>
+            <img src="img/reports.png" />
         </a>
         <a href="organizacion.php" class="button">
             <i class="fa fa-asignacion"></i>

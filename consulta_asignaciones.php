@@ -3,15 +3,14 @@ session_start();
 
 // Verificar si la sesión está iniciada y el usuario está autenticado
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    // Redirigir al usuario a la página de inicio de sesión o mostrar un mensaje de error
     header("Location: loging.php");
     exit();
 }
 
 // Cerrar sesión al hacer clic en el botón
 if (isset($_POST['logout'])) {
-    session_unset(); // Eliminar todas las variables de sesión
-    session_destroy(); // Destruir la sesión
+    session_unset();
+    session_destroy();
     header("Location: loging.php");
     exit();
 }
@@ -44,14 +43,15 @@ if (isset($_GET['filtro'])) {
 }
 
 // Consulta a la tabla "asignaciones" con unión a la tabla "Empleados" y aplicación del filtro de búsqueda
-$sql = "SELECT * FROM asignaciones WHERE 
-        ID_ASIGNACION LIKE '%$filtro%' OR 
-        ID_EMPLEADO LIKE '%$filtro%' OR 
-        ID_EQUIPO LIKE '%$filtro%'";
-
 $sql = "SELECT asignaciones.ID_ASIGNACION, empleados.NOMBRES, empleados.APELLIDOS, asignaciones.ID_EQUIPO 
         FROM asignaciones 
-        JOIN empleados ON asignaciones.ID_EMPLEADO = empleados.ID_EMPLEADO";
+        JOIN empleados ON asignaciones.ID_EMPLEADO = empleados.ID_EMPLEADO
+        WHERE 
+            asignaciones.ID_ASIGNACION LIKE '%$filtro%' OR 
+            empleados.NOMBRES LIKE '%$filtro%' OR 
+            empleados.APELLIDOS LIKE '%$filtro%' OR 
+            asignaciones.ID_EQUIPO LIKE '%$filtro%'
+        ORDER BY asignaciones.FECHA_CREACION DESC";
 
 $result = $conn->query($sql);
 
@@ -72,12 +72,12 @@ if ($result->num_rows > 0) {
         echo "<td class='registro'>" . $row["ID_EQUIPO"] . "</td>";
         echo "<td><a class='button report' target='_blank' href='carta_responsiva.php?id=" . $row["ID_ASIGNACION"] . "'><img src='img/report.png'/></a></td>";
         echo "<td><a class='button edit' href='modificar_asignacion.php?id=" . $row["ID_ASIGNACION"] . "'><img src='img/editar.png'/></a></td>";
+        
         // Formulario para eliminar el registro
         echo "<td><form method='POST' action='' onsubmit='return confirm(\"¿Estás seguro de que deseas eliminar este registro?\");'>
         <input type='hidden' name='id_asignacion' value='" . $row["ID_ASIGNACION"] . "' />
         <button type='submit' class='button delete'><img src='img/eliminar.png'/></button>
-        </form>
-        </td>";
+        </form></td>";
         echo "</tr>";
     }
     echo "</table>";

@@ -23,7 +23,7 @@
     </div>
     <h1>Reportes</h1>
     <center><iframe title="Reporte Equipos - LatiTech" width="1280" height="810" 
-    src="https://app.powerbi.com/view?r=eyJrIjoiNDgwODI2ZDctZjY1NC00YjgyLTkxYzEtMWJhZWNjMjRkOGIzIiwidCI6ImNhY2E5MDExLTdiNmEtNDRkZS04NjFmLTA5NWEyY2E4ODNiNyIsImMiOjR9"
-         frameborder="0" allowFullScreen="true"></iframe></center>
+    src="https://app.powerbi.com/view?r=eyJrIjoiMDY2MzAzZDgtNGZjMy00MzA2LThkNDMtZDVjMWNiOGMwNjQwIiwidCI6ImNhY2E5MDExLTdiNmEtNDRkZS04NjFmLTA5NWEyY2E4ODNiNyIsImMiOjR9&pageName=570fc60914c207d30d8e" 
+        frameborder="0" allowFullScreen="true"></iframe></center>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html>
 <head>
     <link rel="icon" type="image/x-icon" href="img/latitude.ico">
-    <link rel="stylesheet" type="text/css" href="css/equipos.css">
+    <link rel="stylesheet" type="text/css" href="css/consultas.css">
     <title>Consulta de Equipos</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/equipos.js"></script>

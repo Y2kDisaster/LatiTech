@@ -3,7 +3,7 @@
 <head>
     <link rel="icon" type="image/x-icon" href="img/latitude.ico">
     <link rel="stylesheet" type="text/css" href="css/consultas.css">
-    <title>Consulta de Asignaciones</title>
+    <title>Asignaciones</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/asignaciones.js"></script>
 </head>
@@ -18,6 +18,9 @@
             <a class="button-menu" href="asignaciones.php">Asignaciones</a>
             <a class="button-menu" href="empleados.php">Empleados</a>
             <a class="button-menu" href="equipos.php">Equipos</a>
+            <a class="button-menu" href="usuarios.php">Usuarios</a>
+            <a class="button-menu" href="organizacion.php">Organigrama</a>
+            <a class="button-menu" href="reportes.php">Reportes</a>
             <a class="button-menu logout" href="loging.php">Cerrar sesión</a>
         </div>
     </div>

@@ -20,21 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $apellidos = $_POST['apellidos'];
     $correo = $_POST['correo'];
     
-    // ... Aquí puedes realizar validaciones y procesamiento adicional según tus necesidades
-
-    // Configuración de la conexión a la base de datos
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "latitudemx";
-
-    // Crear la conexión
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Verificar la conexión
-    if ($conn->connect_error) {
-        die("Error de conexión: " . $conn->connect_error);
-    }
+    include('conexion.php');
 
     // Actualizar el registro en la tabla "empleados"
     $sql = "UPDATE empleados SET 
@@ -59,20 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: empleados.php");
     exit();
 } else {
-    // Obtener los datos del empleado de la base de datos
-    // Configuración de la conexión a la base de datos
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "latitudemx";
 
-    // Crear la conexión
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Verificar la conexión
-    if ($conn->connect_error) {
-        die("Error de conexión: " . $conn->connect_error);
-    }
+    include('conexion.php');
 
     // Consultar el empleado por ID
     $sql = "SELECT * FROM empleados WHERE ID_EMPLEADO = '$id'";
@@ -130,6 +104,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div>
             <input type="submit" value="Guardar Cambios">
+        </div>
+        <div>
+            <input type="submit" value="Cancelar">
         </div>
     </form>
 </body>

@@ -1,16 +1,5 @@
 <?php
-$servername = "localhost";  // Nombre del servidor
-$username = "root";         // Usuario de MySQL (por defecto en XAMPP)
-$password = "";             // Contraseña de MySQL (por defecto en XAMPP)
-$dbname = "latitudemx";     // Nombre de la base de datos
-
-// Crear una conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar si la conexión es exitosa
-if ($conn->connect_error) {
-    die("Error al conectar con la base de datos: " . $conn->connect_error);
-}
+include('conexion.php');
 session_start();
 
 // Verificar si la sesión está iniciada y el usuario está autenticado

@@ -68,6 +68,11 @@
             <span>Organigrama</span>
             <img src="img/organigrama.png" />
         </a>         
+        <a href="manuales.php" class="button">
+            <i class="fa fa-asignacion"></i>
+            <span>Manual</span>
+            <img src="img/manual.png" />
+        </a>  
     </div>
 </div>
 <form id="logout-form" action="loging.php" method="POST" style="display: none;">

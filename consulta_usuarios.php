@@ -26,7 +26,7 @@ function eliminarRegistro($id_acceso) {
     global $conn;
 
     // Consulta SQL para eliminar el registro
-    $sql = "DELETE FROM asignaciones WHERE ID_ACCESO = '$id_acceso'";
+    $sql = "DELETE FROM accesos WHERE ID_ACCESO = '$id_acceso'";
 
     if ($conn->query($sql) === true) {
         echo "Registro eliminado correctamente.";
@@ -61,7 +61,7 @@ if ($result === false) {
 if ($result->num_rows > 0) {
     echo "<table class='table'>";
     echo "<tr><th>Nombre</th><th>Usuario</th><th>Contraseña</th><td class='modify' colspan='2'><center>
-    <a class='button' href='agregar_asignacion.php'>Agregar un nuevo registro</a></center></td></tr>";
+    <a class='button' href='agregar_usuario.php'>Agregar un nuevo registro</a></center></td></tr>";
 
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
@@ -71,7 +71,7 @@ if ($result->num_rows > 0) {
         <span id='password_" . $row["ID_ACCESO"] . "' style='display: none;'>" . $row["PASSWORD"] . "</span>
         <input type='password' id='password_input_" . $row["ID_ACCESO"] . "' value='" . $row["PASSWORD"] . "' readonly>
         <button id='show' type='button' onclick='togglePassword(" . $row["ID_ACCESO"] . ")'>Mostrar</button></td>";
-        echo "<td><a class='button edit' href='modificar_asignacion.php?id=" . $row["ID_ACCESO"] . "'><img src='img/editar.png'/></a></td>";
+        echo "<td><a class='button edit' href='modificar_usuario.php?id=" . $row["ID_ACCESO"] . "'><img src='img/editar.png'/></a></td>";
         // Formulario para eliminar el registro
         echo "<td><form method='POST' action='' onsubmit='return confirm(\"¿Estás seguro de que deseas eliminar este registro?\");'>
         <input type='hidden' name='id_acceso' value='" . $row["ID_ACCESO"] . "' />
@@ -85,5 +85,5 @@ if ($result->num_rows > 0) {
     echo "No se encontraron registros.";
 }
 
-echo "<div class='add-button'><a class='button' href='agregar_asignacion.php'>Agregar un nuevo registro</a></div>";
+echo "<div class='add-button'><a class='button' href='agregar_usuario.php'>Agregar un nuevo registro</a></div>";
 ?>

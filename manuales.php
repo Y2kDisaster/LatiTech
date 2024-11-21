@@ -20,6 +20,7 @@
             <a class="button-menu" href="equipos.php">Equipos</a>
             <a class="button-menu" href="organizacion.php">Organigrama</a>
             <a class="button-menu" href="reportes.php">Reportes</a>
+            <a class="button-menu" href="manuales.php">Manual</a>
             <a class="button-menu logout" href="loging.php">Cerrar sesión</a>
         </div>
     </div>

@@ -1,4 +1,7 @@
 <?php
+// Iniciar el buffer de salida
+ob_start();
+
 // Conexión a la base de datos
 include('conexion.php'); // Asegúrate de que este archivo tenga la conexión a tu base de datos
 
@@ -39,7 +42,7 @@ if ($result_equipo) {
     if ($result_equipo->num_rows > 0) {
         // Obtener los datos del equipo
         $row_equipo = $result_equipo->fetch_assoc();
-        $nombre_equipo=$row_equipo['NOMBRE_EQUIPO'];
+        $nombre_equipo = $row_equipo['NOMBRE_EQUIPO'];
         $marca_equipo = $row_equipo['MARCA_EQUIPO'];
         $modelo_equipo = $row_equipo['MODELO_EQUIPO'];
         $numero_serie = $row_equipo['NUMERO_SERIE'];
@@ -52,8 +55,9 @@ if ($result_equipo) {
     echo "Error en la consulta del equipo: " . $conn->error;
     exit();
 }
-?>
 
+// HTML para el PDF
+$html = '
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -61,19 +65,91 @@ if ($result_equipo) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cláusula de Responsabilidad</title>
     <link rel="icon" type="image/x-icon" href="img/latitude.ico">
-    <link rel="stylesheet" href="css/carta.css">
+    <style>
+/* Estilos generales */
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    padding-top: 0PX;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+h1, h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+p, ul {
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul li {
+    margin-bottom: 5px;
+}
+
+strong {
+    color: #333;
+}
+
+/* Estilo de firma */
+.firma {
+    margin-top: 70px;
+    text-align: center;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+button:first-of-type {
+    background-color: #555; /* Gris oscuro para el botón de limpiar */
+}
+
+button:last-of-type {
+    background-color: #007bff; /* Azul para el botón de finalizar */
+}
+
+.footer {
+    margin-top: 60px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.footer p {
+    margin-bottom: 1px;
+}
+</style>
 </head>
 <body>
     <div class="container">
         <h1>Cláusula de Responsabilidad y Compensación</h1>
-        <p>El Colaborador asignado en este caso <strong><?php echo $colaborador; ?></strong> acepta y reconoce que asume la completa 
+        <p>El Colaborador asignado en este caso <strong>' . $colaborador . '</strong> acepta y reconoce que asume la completa 
         responsabilidad de salvaguardar y proteger el siguiente equipo de cómputo recibido de Latitude Constructora S.A. de C.V.</p>
         
-        <h2>Equipo <?php echo $nombre_equipo; ?></h2>
+        <h2>Equipo ' . $nombre_equipo . '</h2>
         <ul>
-            <li><strong>Marca:</strong> <?php echo $marca_equipo; ?></li>
-            <li><strong>Modelo:</strong> <?php echo $modelo_equipo; ?></li>
-            <li><strong>Número de serie:</strong> <?php echo $numero_serie; ?></li>
+            <li><strong>Marca:</strong> ' . $marca_equipo . '</li>
+            <li><strong>Modelo:</strong> ' . $modelo_equipo . ' </li>
+            <li><strong>Número de serie:</strong> ' . $numero_serie . ' </li>
         </ul>
 
         <p>En caso de pérdida, robo, extravío, daño o avería del equipo de cómputo por causa imputable al Colaborador asignado, este se compromete 
@@ -92,11 +168,22 @@ if ($result_equipo) {
             <p>Fecha y Firma</p>
         </div>
 
-        <footer>
-            <p><strong>Fecha de expedición:</strong> <?php echo date('d/m/Y'); ?></p>
+        <div class="footer">
+            <p><strong>Fecha de expedición:</strong> '. date("d/m/Y").'</p>
             <p>Washington No. 2760, Col Deportivo Obispado, Monterrey N.L</p>
             <p>+52(81) 2126.4343 | info@latitude.mx | www.latitude.mx</p>
-        </footer>
+        </div>
     </div>
 </body>
-</html>
+</html>';
+
+// Limpiar el buffer de salida y no mostrar nada antes de generar el PDF
+ob_end_clean();
+require_once 'dompdf/autoload.inc.php';
+use Dompdf\Dompdf;
+$dompdf = new Dompdf();
+$dompdf->loadHtml($html);
+$dompdf->setPaper('A4', 'portrait');
+$dompdf->render();
+$dompdf->stream('Carta_Responsabilidad_'.$nombre_equipo.'_'.$colaborador.'.pdf',array("Attachment"=>1));
+?>

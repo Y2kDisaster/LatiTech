@@ -85,7 +85,7 @@ if ($result_equipo) {
         <p>En caso de que el equipo de cómputo sufra daños o averías que no sean imputables al Colaborador asignado, este deberá notificar de inmediato a 
         Latitude Constructora S.A. de C.V. por medio del Lic. Ricardo Acosta y/o el Depto. de Sistemas para colaborar en las gestiones necesarias para su reparación o reemplazo.</p>
         <p>El Colaborador asignado comprende y acepta que cualquier incumplimiento de las disposiciones establecidas en esta cláusula podría 
-        resultar en su obligación de indemnizar a Latitude Constructora SA de CV por el valor del equipo de cómputo y los perjuicios ocasionados.</p>
+        resultar en su obligación de indemnizar a Latitude Constructora S.A. de C.V. por el valor del equipo de cómputo y los perjuicios ocasionados.</p>
         
         <div class="firma">
             <p>_____________________________________</p>

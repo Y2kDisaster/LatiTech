@@ -70,7 +70,7 @@ if ($result->num_rows > 0) {
         echo "<td class='registro'>" . $row["ID_ASIGNACION"] . "</td>";
         echo "<td class='registro'>" . $row["NOMBRES"] . " " . $row["APELLIDOS"] . "</td>";
         echo "<td class='registro'>" . $row["ID_EQUIPO"] . "</td>";
-        echo "<td><a class='button report' target='_blank' href='carta_responsiva.php?id=" . $row["ID_ASIGNACION"] . "'><img src='img/report.png'/></a></td>";
+        echo "<td><a class='button download' target='_blank' href='carta_responsiva.php?id=" . $row["ID_ASIGNACION"] . "'><img src='img/download.png'/></a></td>";
         echo "<td><a class='button edit' href='modificar_asignacion.php?id=" . $row["ID_ASIGNACION"] . "'><img src='img/editar.png'/></a></td>";
         
         // Formulario para eliminar el registro

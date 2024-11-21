@@ -23,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $numeroDiscos = $_POST['numero_discos'];
     $tipoDisco0 = $_POST['tipo_disco0'];
     $tipoDisco1 = $_POST['tipo_disco1'];
-    $idProducto = $_POST['id_producto'];
     $numeroSerie = $_POST['numero_serie'];
     
     include('conexion.php');
@@ -42,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             NUMERO_DISCOS = '$numeroDiscos',
             TIPO_DISCO0 = '$tipoDisco0',
             TIPO_DISCO1 = '$tipoDisco1',
-            ID_PRODUCTO = '$idProducto',
             NUMERO_SERIE = '$numeroSerie'
             WHERE NOMBRE_EQUIPO = '$id'";
 
@@ -58,9 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: equipos.php");
     exit();
 } else {
-    // Obtener los datos del equipo de la base de datos
-    // Configuración de la conexión a la base de datos
-    include('conexion.php');
+include('conexion.php');
 
     // Consultar el equipo por ID
     $sql = "SELECT * FROM equipos WHERE NOMBRE_EQUIPO = '$id'";

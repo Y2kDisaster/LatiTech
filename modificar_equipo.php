@@ -26,21 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $idProducto = $_POST['id_producto'];
     $numeroSerie = $_POST['numero_serie'];
     
-    // ... Aquí puedes realizar validaciones y procesamiento adicional según tus necesidades
-
-    // Configuración de la conexión a la base de datos
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "latitudemx";
-
-    // Crear la conexión
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Verificar la conexión
-    if ($conn->connect_error) {
-        die("Error de conexión: " . $conn->connect_error);
-    }
+    include('conexion.php');
 
     // Actualizar el registro en la tabla "equipos"
     $sql = "UPDATE equipos SET 
@@ -74,18 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     // Obtener los datos del equipo de la base de datos
     // Configuración de la conexión a la base de datos
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "latitudemx";
-
-    // Crear la conexión
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Verificar la conexión
-    if ($conn->connect_error) {
-        die("Error de conexión: " . $conn->connect_error);
-    }
+    include('conexion.php');
 
     // Consultar el equipo por ID
     $sql = "SELECT * FROM equipos WHERE NOMBRE_EQUIPO = '$id'";

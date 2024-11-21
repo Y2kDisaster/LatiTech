@@ -9,28 +9,30 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
 // Verifica si se ha enviado el formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Obtén los valores de ID_EMPLEADO e ID_EQUIPO del formulario
-    $ID_EMPLEADO = $_POST["ID_EMPLEADO"];
-    $ID_EQUIPO = $_POST["ID_EQUIPO"];
+    // Obtén los valores de ID_ACCESO e NOMBRE del formulario
+    $NOMBRE = $_POST["NOMBRE"];
+    $USUARIO = $_POST["USUARIO"];
+    $PASSWORD = $_POST["PASSWORD"];
 
     // Consulta para verificar si el empleado ya tiene una asignación de equipo
-    $check_duplicate_sql = "SELECT ID_EMPLEADO FROM asignaciones WHERE ID_EMPLEADO = ?";
+    $check_duplicate_sql = "SELECT ID_ACCESO FROM accesos WHERE ID_ACCESO = ?";
     $stmt = $conn->prepare($check_duplicate_sql);  // Usamos prepared statements para seguridad
-    $stmt->bind_param("s", $ID_EMPLEADO);  // 's' indica que se está enlazando un string
+    $stmt->bind_param("s", $ID_ACCESO);  // 's' indica que se está enlazando un string
     $stmt->execute();
     $duplicate_result = $stmt->get_result();
 
     // Verifica si el empleado ya tiene una asignación
     if ($duplicate_result->num_rows > 0) {
-        echo '<script>alert("El ID de empleado \'' . $ID_EMPLEADO . '\' ya tiene una asignación. Por favor, ingresa otro.");</script>';
+        echo '<script>alert("El ID de empleado \'' . $ID_ACCESO . '\' ya tiene una asignación. Por favor, ingresa otro.");</script>';
     } else {
-        // Inserta el nuevo registro en la tabla asignaciones
-        $insert_sql = "INSERT INTO asignaciones (ID_EMPLEADO, ID_EQUIPO) VALUES (?, ?)";
+        // Inserta el nuevo registro en la tabla accesos
+        $insert_sql = "INSERT INTO accesos (NOMBRE, USUARIO, PASSWORD) VALUES (?, ?, ?)";
         $stmt_insert = $conn->prepare($insert_sql);
-        $stmt_insert->bind_param("ss", $ID_EMPLEADO, $ID_EQUIPO);  // 'ss' indica dos strings
+        $stmt_insert->bind_param("sss", $NOMBRE, $USUARIO, $PASSWORD);  // 'ss' indica dos strings
 
         if ($stmt_insert->execute()) {
             echo '<script>alert("Registro insertado correctamente.");</script>';
+            header("Location: usuarios.php");
         } else {
             echo '<script>alert("Error al insertar el registro: ' . $conn->error . '");</script>';
         }
@@ -57,42 +59,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="menu-container">
             <a class="button-menu" href="inicio.php">Inicio</a>
-            <a class="button-menu" href="asignaciones.php">Asignaciones</a>
+            <a class="button-menu" href="accesos.php">accesos</a>
             <a class="button-menu" href="empleados.php">Empleados</a>
             <a class="button-menu" href="equipos.php">Equipos</a>
             <a class="button-menu logout" href="loging.php">Cerrar sesión</a>
         </div>
     </div>
-    <h1>Agregar Asignación</h1>
+    <h1>Agregar Usuario</h1>
 
     <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
         <div>
-            <label for="ID_EMPLEADO">ID Empleado:</label>
-            <input type="text" name="ID_EMPLEADO" required>
+            <label for="NOMBRE">Nombre:</label>
+            <input type="text" name="NOMBRE" required>
         </div>
-
         <div>
-    <label for="ID_EQUIPO">Nombre del Equipo:</label>
-    <select name="ID_EQUIPO" required>
-        <option value="">Seleccione un equipo</option>
-        <?php
-        // Consulta para obtener los equipos con estado 'STOCK'
-        $sql = "SELECT NOMBRE_EQUIPO FROM equipos WHERE ESTADO = 'STOCK'";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                // Mostrar el nombre del equipo como el valor y el texto de la opción
-                echo '<option value="' . $row["NOMBRE_EQUIPO"] . '">' . $row["NOMBRE_EQUIPO"] . '</option>';
-            }
-        } else {
-            echo '<option value="">No hay equipos disponibles en STOCK</option>';
-        }
-
-        $conn->close();
-        ?>
-    </select>
-</div>
+            <label for="USUARIO">Usuario:</label>
+            <input type="text" name="USUARIO" required>
+        </div>
+        <div>
+            <label for="PASSWORD">Contraseña:</label>
+            <input type="text" name="PASSWORD" required>
+        </div>        
         <div>
             <input type="submit" value="Agregar">
         </div>

@@ -23,8 +23,8 @@
             <a class="button-menu logout" href="loging.php">Cerrar sesión</a>
         </div>
     </div>
-    <h1>Reportes</h1>
-    <iframe src="https://scribehow.com/embed/Manual_LatiTech__wc-PMKbMRBuauIDUfI-qQA?as=scrollable"
-        width="1280" height="640" allowfullscreen frameborder="0"></iframe>
+    <h1>Manual</h1>
+    <center><iframe src="https://scribehow.com/embed/Manual_LatiTech__wc-PMKbMRBuauIDUfI-qQA?as=scrollable"
+        width="1280" height="640" allowfullscreen frameborder="0"></iframe></center>
 </body>
 </html>

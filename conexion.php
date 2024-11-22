@@ -1,8 +1,8 @@
 <?php
-$servername = "bgj4eddbzovcemeemg6m-mysql.services.clever-cloud.com";
-$username = "unqahplkbugt8lid";
-$password = "w9SvA7Y7n0eDQURlPOhO";
-$dbname = "bgj4eddbzovcemeemg6m";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "latitudemx";
 
 // Crear la conexión
 $conn = new mysqli($servername, $username, $password, $dbname);

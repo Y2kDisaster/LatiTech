@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo '<script>alert("El ID de empleado \'' . $ID_EMPLEADO . '\' ya tiene una asignación. Por favor, ingresa otro.");</script>';
     } else {
         // Inserta el nuevo registro en la tabla asignaciones
-        $insert_sql = "INSERT INTO asignaciones (ID_EMPLEADO, ID_EQUIPO) VALUES (?, ?)";
+        $insert_sql = "INSERT INTO asignaciones (ID_EMPLEADO, ID_EQUIPO,FECHA_CREACION) VALUES (?, ?, NOW())";
         $stmt_insert = $conn->prepare($insert_sql);
         $stmt_insert->bind_param("ss", $ID_EMPLEADO, $ID_EQUIPO);  // 'ss' indica dos strings
 

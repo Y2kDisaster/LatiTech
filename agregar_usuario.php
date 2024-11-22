@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo '<script>alert("El ID de empleado \'' . $ID_ACCESO . '\' ya tiene una asignación. Por favor, ingresa otro.");</script>';
     } else {
         // Inserta el nuevo registro en la tabla accesos
-        $insert_sql = "INSERT INTO accesos (NOMBRE, USUARIO, PASSWORD) VALUES (?, ?, ?)";
+        $insert_sql = "INSERT INTO accesos (NOMBRE, USUARIO, PASSWORD,FECHA_CREACION) VALUES (?, ?, ?,NOW())";
         $stmt_insert = $conn->prepare($insert_sql);
         $stmt_insert->bind_param("sss", $NOMBRE, $USUARIO, $PASSWORD);  // 'ss' indica dos strings
 
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="menu-container">
             <a class="button-menu" href="inicio.php">Inicio</a>
-            <a class="button-menu" href="accesos.php">accesos</a>
+            <a class="button-menu" href="accesos.php">Accesos</a>
             <a class="button-menu" href="empleados.php">Empleados</a>
             <a class="button-menu" href="equipos.php">Equipos</a>
             <a class="button-menu logout" href="loging.php">Cerrar sesión</a>

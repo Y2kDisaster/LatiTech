@@ -44,12 +44,11 @@ if (isset($_GET['filtro'])) {
 }
 
 // Consulta a la tabla "asignaciones" con unión a la tabla "Empleados" y aplicación del filtro de búsqueda
-$sql = "SELECT * FROM asignaciones WHERE 
+$sql = "SELECT * FROM accesos WHERE 
         ID_ACCESO LIKE '%$filtro%' OR 
-        ID_EMPLEADO LIKE '%$filtro%' OR 
-        ID_EQUIPO LIKE '%$filtro%'";
-
-$sql = "SELECT * FROM accesos";
+        NOMBRE LIKE '%$filtro%' OR 
+        USUARIO LIKE '%$filtro%'
+        ORDER BY FECHA_CREACION DESC";
 
 $result = $conn->query($sql);
 

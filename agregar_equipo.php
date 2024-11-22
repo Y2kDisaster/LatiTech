@@ -34,8 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo '<script>alert("El nombre de equipo \'' . $nombre_equipo . '\' ya está duplicado. Por favor, ingresa otro nombre.");</script>';
     } else {
         // Consulta SQL para insertar un nuevo registro en la tabla "equipos"
-        $insert_sql = "INSERT INTO equipos (NOMBRE_EQUIPO, ESTADO, MARCA_EQUIPO, MODELO_EQUIPO, SISTEMA_OPERATIVO, MARCA_PROCESADOR, MODELO_PROCESADOR, VELOCIDAD_PROCESADOR, RAM, NUMERO_DISCOS, TIPO_DISCO0, TIPO_DISCO1, ID_PRODUCTO, NUMERO_SERIE)
-                VALUES ('$nombre_equipo', '$estado', '$marca_equipo', '$modelo_equipo', '$sistema_operativo', '$marca_procesador', '$modelo_procesador', '$velocidad_procesador', '$ram', '$num_discos', '$tipo_disco0', '$tipo_disco1', '$idproducto', '$numero_serie')";
+        $insert_sql = "INSERT INTO equipos (NOMBRE_EQUIPO, ESTADO, MARCA_EQUIPO, MODELO_EQUIPO, SISTEMA_OPERATIVO, MARCA_PROCESADOR, MODELO_PROCESADOR, VELOCIDAD_PROCESADOR, RAM, NUMERO_DISCOS, TIPO_DISCO0, TIPO_DISCO1, ID_PRODUCTO, NUMERO_SERIE,FECHA_CREACION)
+                VALUES ('$nombre_equipo', '$estado', '$marca_equipo', '$modelo_equipo', '$sistema_operativo', '$marca_procesador', '$modelo_procesador', '$velocidad_procesador', '$ram', '$num_discos', '$tipo_disco0', '$tipo_disco1', '$idproducto', '$numero_serie',NOW())";
 
         if ($conn->query($insert_sql) === true) {
             echo '<script>alert("Registro insertado correctamente.");</script>';
